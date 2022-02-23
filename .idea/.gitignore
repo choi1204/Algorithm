@@ -13,7 +13,8 @@
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
-**/test/
+
+**/programmers/test/
 
 *.xml
 *.iml
@@ -24,6 +25,7 @@
 *.war
 *.nar
 *.ear
+
 *.zip
 *.tar.gz
 *.rar
