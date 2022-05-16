@@ -1,4 +1,4 @@
-package algorithm.test;
+package algorithm.test.devcos;
 
 import java.util.ArrayList;
 import java.util.Arrays;
