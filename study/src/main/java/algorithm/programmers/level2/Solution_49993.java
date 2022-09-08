@@ -24,7 +24,7 @@ public class Solution_49993 {
                 }
             }
 
-            answer = check == true ? answer + 1 : answer;
+            answer = check ? answer + 1 : answer;
         }
 
         return answer;
