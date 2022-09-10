@@ -1,5 +1,6 @@
 package algorithm.programmers.level3;
 
+import java.util.LinkedList;
 import java.util.Stack;
 
 /**
@@ -45,7 +46,54 @@ public class Solution_81303 {
 
     //LinkedLlist
     public String solution_LinkedList(int n, int k, String[] cmd) {
-        String answer = "";
-        return answer;
+        StringBuilder answer = new StringBuilder("O".repeat(n));
+        int[] pre = new int[n];
+        int[] next = new int[n];
+        for (int i = 0; i < n ; i++) {
+            pre[i]= i - 1;
+            next[i] = i + 1;
+        }
+        next[n - 1] = -1;
+        Stack<Integer> deleteStack = new Stack<>();
+
+        int cursor = k;
+
+        for (String command : cmd) {
+            char c = command.charAt(0);
+            if (command.length() > 1) {
+                int value = Integer.parseInt(command.substring(2));
+                if (c == 'U') {
+                    while (value-- > 0) {
+                        cursor = pre[cursor];
+                    }
+                } else if (c == 'D') {
+                    while (value-- > 0) {
+                        cursor = next[cursor];
+                    }
+                }
+            } else if (c == 'Z') {
+                int deleteData = deleteStack.pop();
+                answer.setCharAt(deleteData, 'O');
+                if (pre[deleteData] != -1) {
+                    next[pre[deleteData]] = deleteData;
+                }
+                if (next[deleteData] != -1) {
+                    pre[next[deleteData]] = deleteData;
+                }
+            } else if (c == 'C') {
+                deleteStack.push(cursor);
+                answer.setCharAt(cursor, 'X');
+                if (pre[cursor] != -1) {
+                    next[pre[cursor]] = next[cursor];
+                }
+                if (next[cursor] != -1) {
+                    pre[next[cursor]] = pre[cursor];
+                    cursor = next[cursor];
+                } else {
+                    cursor = pre[cursor];
+                }
+            }
+        }
+        return answer.toString();
     }
 }
